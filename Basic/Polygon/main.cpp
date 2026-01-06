@@ -1,41 +1,52 @@
-#include<gl/GlUT.h>
+#include<gl/GLUT.h>
+#include<cmath>
 
-void init()
+void init ()
 {
-    glClearColor(1,0,0,0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(100,0,100,0);
+
 }
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0,1,0);
-    glBegin(GL_POLYGON);
-    glVertex2f(32,52);
-    glVertex2f(22,94);
-    glVertex2f(25,34);
-    glVertex2f(34,65);
-    glVertex2f(85,25);
 
+    glColor3f(1,0,0);
+    glLoadIdentity();
+    glBegin(GL_QUADS);
+        glVertex2f(-0.4f, -0.4f);
+        glVertex2f( 0.4f, -0.4f);
+        glVertex2f( 0.4f,  0.4f);
+        glVertex2f(-0.4f,  0.4f);
     glEnd();
-    glFlush();
+
+    glColor3f(0,1,0);
+    glLoadIdentity();
+    glScalef(0,1,.0);
+     glBegin(GL_QUADS);
+        glVertex2f(-0.4f, -0.4f);
+        glVertex2f( 0.4f, -0.4f);
+        glVertex2f( 0.4f,  0.4f);
+        glVertex2f(-0.4f,  0.4f);
+    glEnd();
 
 }
 
-
-int main(int a, char **b)
+void init()
 {
-    glutInit(&a, b);
-    glutInitWindowSize(200,200);
+    glClearColor(0,0,0,0);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main(int argc, char **argv)
+{
+    glutInit(&argc,argv);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
-    glutCreateWindow("Polygon");
+    glutInitWindowSize(600,600);
+    glutInitWindowPosition(100,100);
+    glutCreateWindow("DdD")
 
     init();
-    glutDisplayFunc(display);
+    glutDialsFunc(display);
     glutMainLoop();
-
     return 0;
-
 }

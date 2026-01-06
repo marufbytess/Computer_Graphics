@@ -16,7 +16,7 @@ void display() {
     // Scaled square (Blue)
     glColor3f(0.0f, 0.0f, 1.0f);
     glLoadIdentity();
-    glScalef(1.5f, 0.5f, 0.0f);   // Scaling factors
+    glScalef(1.5f,.5f, 0.0f);   // Scaling factors
     glBegin(GL_QUADS);
         glVertex2f(-0.4f, -0.4f);
         glVertex2f( 0.4f, -0.4f);

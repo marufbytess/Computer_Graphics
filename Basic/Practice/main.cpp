@@ -1,38 +1,46 @@
-#include<gl/Glut.h>
-#include<cmath>
+#include<gl/GLUT.h>
 
 void init()
 {
     glClearColor(0,0,0,0);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0,20,0,20);
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1,0,0);
-    glBegin(GL_LINE_LOOP);
-    for(int i=0;i<360;i++)
-    {
-        float angle = i*3.1416/180;
-        float x = 10+ 5*cos(angle);
-        float y = 10+ 5*sin(angle);
-        glVertex2f(x,y);
-    }
+    glLoadIdentity();
+    glBegin(GL_QUADS);
+        glVertex2f(-0.4f, -0.4f);
+        glVertex2f( 0.4f, -0.4f);
+        glVertex2f( 0.4f,  0.4f);
+        glVertex2f(-0.4f,  0.4f);
     glEnd();
+
+    glColor3f(0,1,0);
+    glScalef(1.5,0.5,0);
+    glLoadIdentity();
+    glBegin(GL_QUADS);
+    glVertex2f(-0.4f, -0.4f);
+        glVertex2f( 0.4f, -0.4f);
+        glVertex2f( 0.4f,  0.4f);
+        glVertex2f(-0.4f,  0.4f);
+    glEnd();
+
     glFlush();
 }
 
-int main(int argc, char **argv)
+int main(int a, char **b)
 {
-    glutInit(&argc, argv);
-    glutInitWindowSize(500,500);
+    glutInit(&a, b);
     glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
-    glutCreateWindow("create");
+    glutInitWindowSize(600,600);
+    glutCreateWindow("Done");
 
     init();
     glutDisplayFunc(display);
     glutMainLoop();
+
+    return 0;
 }

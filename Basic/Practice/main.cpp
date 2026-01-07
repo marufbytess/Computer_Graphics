@@ -1,97 +1,48 @@
 #include<gl/GLUT.h>
 
-float angle = 0;
+void init()
+{
+    glClearColor(0,0,0,1);
+    glMatrixMode(GL_MODELVIEW);
+}
 
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     glLoadIdentity();
-
-    glTranslatef(0,0,-5);
-    glRotatef(angle,1,1,0);
-
+    glColor3f(1,0,0);
     glBegin(GL_QUADS);
-
-    glColor3f(1, 0, 0);
-    glVertex3f(-1,-1, 1);
-    glVertex3f( 1,-1, 1);
-    glVertex3f( 1, 1, 1);
-    glVertex3f(-1, 1, 1);
-
-    // Back face (Green)
-    glColor3f(0, 1, 0);
-    glVertex3f(-1,-1,-1);
-    glVertex3f(-1, 1,-1);
-    glVertex3f( 1, 1,-1);
-    glVertex3f( 1,-1,-1);
-
-    // Top face (Blue)
-    glColor3f(0, 0, 1);
-    glVertex3f(-1, 1,-1);
-    glVertex3f(-1, 1, 1);
-    glVertex3f( 1, 1, 1);
-    glVertex3f( 1, 1,-1);
-
-    // Bottom face (Yellow)
-    glColor3f(1, 1, 0);
-    glVertex3f(-1,-1,-1);
-    glVertex3f( 1,-1,-1);
-    glVertex3f( 1,-1, 1);
-    glVertex3f(-1,-1, 1);
-
-    // Right face (Cyan)
-    glColor3f(0, 1, 1);
-    glVertex3f( 1,-1,-1);
-    glVertex3f( 1, 1,-1);
-    glVertex3f( 1, 1, 1);
-    glVertex3f( 1,-1, 1);
-
-    // Left face (Magenta)
-    glColor3f(1, 0, 1);
-    glVertex3f(-1,-1,-1);
-    glVertex3f(-1,-1, 1);
-    glVertex3f(-1, 1, 1);
-    glVertex3f(-1, 1,-1);
-
+    glVertex2f(-0.3f, -0.3f);
+        glVertex2f( 0.3f, -0.3f);
+        glVertex2f( 0.3f,  0.3f);
+        glVertex2f(-0.3f,  0.3f);
     glEnd();
-    glutSwapBuffers();
 
-}
+    glLoadIdentity();
+    glColor3f(0,1,0);
+        glScalef(1.5f,.5f,1.0f);
 
-void timer(int)
-{
-    angle +=1;
-    glutPostRedisplay();
-    glutTimerFunc(16,timer,0);
-}
+        glBegin(GL_QUADS);
 
-void init()
-{
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(0,0,0,1);
+    glVertex2f(-0.3f, -0.3f);
+        glVertex2f( 0.3f, -0.3f);
+        glVertex2f( 0.3f,  0.3f);
+        glVertex2f(-0.3f,  0.3f);
+    glEnd();
+    glFlush();
 
-}
-
-void reshape(int w, int h)
-{
- glViewport(0,0,w,h);
- glMatrixMode(GL_PROJECTION);
- glLoadIdentity();
- gluPerspective(45,(float)w/h,1,100);
- glMatrixMode(GL_MODELVIEW);
 }
 
 int main(int a, char **b)
 {
     glutInit(&a,b);
-    glutInitDisplayMode(GL_DOUBLE|GL_RGB|GL_DEPTH);
     glutInitWindowSize(500,500);
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
     glutCreateWindow("DDD");
 
     init();
     glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutTimerFunc(0,timer,0);
 
     glutMainLoop();
     return 0;
